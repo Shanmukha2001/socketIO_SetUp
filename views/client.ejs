@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Socket.IO chat</title>
+  <!-- linking css file for input and button design -->
+  <!-- public\css\style.css <= check this out and modify,add or remove any thing if you want -->
+  <link rel="stylesheet" href="css/style.css"> 
+</head>
+
+<body>
+  <!-- creating a ul to store the users messages -->
+  <ul id="messages"></ul> 
+
+  <!-- form with an id "form" we are going to be using this id in sample.js  -->
+  <form id="form" action="">
+    <!-- creating a input field with autocomplete as off( to avoid showing suggestions ) along with a button-->
+    <input id="input" autocomplete="off" /><button>Send</button>
+  </form>
+
+  <!--  we need to include this to allow clients to use socket io  -->
+  <!-- we are fetching this js from this node_modules/socket.io-client/dist/socket.io.js location  -->
+  <!-- DO NOT CHANGE THE node_modules/socket.io-client/dist/socket.io.js -->
+  <script src="/socket.io/socket.io.js" defer ></script> 
+
+  <!-- we are including sample.js from public folder and we need to use  -->
+  <!-- defer attribute to tell the browser to only execute the script file once the HTML
+     document has been fully loaded, and to allow any changes to ne dynamically shown  -->
+  <script src="sample.js" defer></script>
+  
+  <!-- <script>
+    const roomId = '<%= roomId %>';
+    console.log(roomId); // see this output in console in browser by typing ctrl+f12
+  </script> -->
+
+</body>
+</html>
