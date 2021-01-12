@@ -1,7 +1,7 @@
 /* 
 
-NOTE: I SUGGEST YOU TO HAVE A GLANCE AT ALL THE WEBSITES PROVIDED..NO NEED TO ALL THE ANSWERS READ
-THE MOST RELEVANT AND EASY TO UNDERSTAND ANSWERS (WITH HIGH VOTES PROVIDED)
+NOTE: I SUGGEST YOU TO HAVE A GLANCE AT ALL THE WEBSITES PROVIDED..NO NEED TO READ ALL THE ANSWERS ...
+JUST READ THE MOST RELEVANT AND EASY TO UNDERSTAND ANSWERS (WITH HIGH VOTES PROVIDED)
 
 https://youtu.be/xHLd36QoS4k <= see this video first to understand how require() works
 
@@ -31,13 +31,14 @@ const io = require('socket.io')(http); // import socket io and pass http to it
 
 // set view engine as ejs since there were many errors associated with html
 // moreover html is static type and ejs( https://www.quora.com/Why-do-developers-have-to-use-Jade-and-EJS-instead-of-HTML-with-Express-and-Node ) is dynamic
-app.set('view engine', 'ejs') 
-app.use(express.static('public')) 
-// we are saying express to use public folder for all the static files, such as css,images and js
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+// we are saying express to use public folder for all the static files, such as css,images and js, which we will be using in our client.js file
 
+//where req , res are request and responce respectively
 app.get('/', (req, res) => {
-    res.redirect(`/${uuidv4()}`); 
-    // generate a random room code(uuidv4() => this generated a random room ) and redirect to the generated room 
+    res.redirect(`/${uuidv4()}`);
+    // generate a random room code(uuidv4() => this generates a random room ) and redirect to the generated room 
 });
 
 // once a random room number is generated , we can use it by using 
@@ -58,24 +59,24 @@ app.get('/', (req, res) => {
 // you may see the req json code by using console.log(req) inside the below call back function
 app.get('/:room', (req, res) => {
     res.render('client', { roomId: req.params.room });
+    // console.log(req); // uncomment this to see the json file and find the room in the terminal ( ctrl+f works in terminal also)
+    // render( show the user the client.ejs file ) and send roomId
     // where roomId is the variable name which is passed to client.js file 
+    // we can use this roomId by typing <%= roomId %> inside the client.ejs file inside the script tags
 
     room = req.params.room;
-    // console.log(req); // uncomment this to see the json file and find it in the terminal ( ctrl+f works in terminal also)
 
-    // render( show the user the client.ejs file ) and send roomId
-    // we can use this roomId by typing <%= roomId %> inside the client.ejs file inside the script tags
 });
 
 /*  DO NOT CHANGE ABOVE CODE WRITE YOUR CODE INSIDE THIS BLOCK  
 */
- 
+
 io.on('connection', (socket) => {
     console.log('a user connected'); // print this line when a user is connectd in the terminal as this is server side
-    console.log("room id: "+room); // print the room id
+    console.log("room id: " + room); // print the room id
 
-    // when a user emits chat message( this can be anything as this is just a variable)
-    // in sample.js which is inside the public folder
+    // when a user emits 'chat message' ( this can be anything as this is just a random choosen name)
+    // in sample.js  which is inside the public folder ( from client side )
     // we are sending the text entered by user inside the input ... which is recieved as msg
     // this msg is consoled in the server again
 
@@ -83,12 +84,12 @@ io.on('connection', (socket) => {
     // https://socket.io/docs/v3/emit-cheatsheet/
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
-      });
+    });
 
     // when a user disconnects 'disconnect' is triggered and shown in the terminal
     socket.on('disconnect', () => {
-        console.log('user disconnected');
-      });
+        console.log('user disconnected:'+socket.id);
+    });
 });
 
 /*  DO NOT CHANGE BELOW CODE WRITE YOUR CODE INSIDE THIS BLOCK  */

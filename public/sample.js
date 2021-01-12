@@ -4,8 +4,7 @@
 // you need not mention complete path.... say for ex: we create a file Hk.js inside the client.ejs we 
 // just need to use <script src="Hk.js" defer ></script> we usually give complete path but this is taken care by express in our project
 
-var socket = io();
-
+const socket = io();
 
 var form = document.getElementById('form'); // using form
 var input = document.getElementById('input'); // using input
@@ -21,3 +20,5 @@ form.addEventListener('submit', (e) => {
         input.value = ''; // set input value as '' i.e remove all the characters entered by user and make it empty
     }
 });
+
+socket.on()
