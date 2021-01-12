@@ -64,8 +64,6 @@ app.get('/:room', (req, res) => {
     // where roomId is the variable name which is passed to client.js file 
     // we can use this roomId by typing <%= roomId %> inside the client.ejs file inside the script tags
 
-    room = req.params.room;
-
 });
 
 /*  DO NOT CHANGE ABOVE CODE WRITE YOUR CODE INSIDE THIS BLOCK  
@@ -74,6 +72,8 @@ app.get('/:room', (req, res) => {
 io.on('connection', (socket) => {
     console.log('a user connected'); // print this line when a user is connectd in the terminal as this is server side
     console.log("room id: " + room); // print the room id
+    let name = socket.handshake.headers.referer.split(`${port}/`)// split based on port number this will give us [ 'http://localhost:', 'roomid' ]
+    room = name[1];
 
     // when a user emits 'chat message' ( this can be anything as this is just a random choosen name)
     // in sample.js  which is inside the public folder ( from client side )
